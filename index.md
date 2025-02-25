@@ -1,17 +1,17 @@
 <html>
-
 <body>
-    <script type='text/javascript'>
+
+<script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
-				'00DcZ000000xcMD',
-				'Web_Chat_v2',
-				'https://pflms--scvoicenew.sandbox.my.site.com/ESWWebChatv21737707144466',
+				'00Dce000001LoFm',
+				'Web_Chat',
+				'https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991',
 				{
-					scrt2URL: 'https://pflms--scvoicenew.sandbox.my.salesforce-scrt.com'
+					scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com'
 				}
 			);
 		} catch (err) {
@@ -19,9 +19,7 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://pflms--scvoicenew.sandbox.my.site.com/ESWWebChatv21737707144466/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
+<script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
 </body>
-
 </html>
