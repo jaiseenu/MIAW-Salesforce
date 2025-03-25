@@ -46,7 +46,7 @@ document.getElementById('myButton').addEventListener('click', function() {
       hideNotificationArea();
     });
 </script>
-<script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()' oncomplete='hideNotificationArea()'></script>
 
 </body>
 </html>
