@@ -24,7 +24,9 @@
 	function hideNotificationArea(){
 		try {
 			const chatElement = document.getElementById('embedded-messaging');
-                        console.log('::$$::', chatElement);
+                        console.log('::$$chatElement::', chatElement);
+                        const dd = document.getElementById('embeddedMessagingSiteContextFrame');
+                        console.log('::$$dd::', dd);
                         // Add event listener
                        chatElement.addEventListener('click', function() {
                              alert('Button clicked! Heading says: ' , chatElement);
