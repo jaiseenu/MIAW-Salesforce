@@ -15,38 +15,13 @@
 					scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com'
 				}
 			);
-			hideNotificationArea();
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
-
-	document.addEventListener('DOMContentLoaded', function() {
-      hideNotificationArea();
-    });
-
-	function hideNotificationArea(){
-		try {
-			const chatElement = document.getElementById('embedded-messaging');
-                        console.log('::$$chatElement::', chatElement);
-                        const dd = document.getElementById('embeddedMessagingSiteContextFrame');
-                        console.log('::$$dd::', dd);
-                        // Add event listener
-                       chatElement.addEventListener('click', function() {
-                             alert('Button clicked! Heading says: ' , chatElement);
-                       });
-			
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-
-
-document.getElementById('formSubmitButton-23').addEventListener('click', function() {
-      hideNotificationArea();
-    });
+    
 </script>
-<script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()' onreadystatechange='hideNotificationArea()'></script>
+<script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()' ></script>
 
 </body>
 </html>
