@@ -23,7 +23,12 @@
 
 	function hideNotificationArea(){
 		try {
-			alert('TESTT');
+			const chatElement = document.getElementById('embedded-messaging');
+                        console.log('::$$::', chatElement);
+                        // Add event listener
+                       chatElement.addEventListener('click', function() {
+                             alert('Button clicked! Heading says: ' , chatElement);
+                       });
 			
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
