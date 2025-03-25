@@ -1,6 +1,5 @@
 <html>
 <body>
-<button id="myButton">Click Me</button>
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
