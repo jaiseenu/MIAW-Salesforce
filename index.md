@@ -42,7 +42,7 @@
 	};
 
 
-document.getElementById('myButton').addEventListener('click', function() {
+document.getElementById('formSubmitButton-23').addEventListener('click', function() {
       hideNotificationArea();
     });
 </script>
