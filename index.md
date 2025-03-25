@@ -15,6 +15,16 @@
 					scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com'
 				}
 			);
+			hideNotificationArea();
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+
+	function hideNotificationArea(){
+		try {
+			alert('TESTT');
+			
 		} catch (err) {
 			console.error('Error loading Embedded Messaging: ', err);
 		}
