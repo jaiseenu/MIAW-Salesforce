@@ -21,6 +21,10 @@
 		}
 	};
 
+	document.addEventListener('DOMContentLoaded', function() {
+      hideNotificationArea();
+    });
+
 	function hideNotificationArea(){
 		try {
 			const chatElement = document.getElementById('embedded-messaging');
