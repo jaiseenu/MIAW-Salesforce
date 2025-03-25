@@ -1,6 +1,6 @@
 <html>
 <body>
-
+<button id="myButton">Click Me</button>
 <script type='text/javascript'>
 	function initEmbeddedMessaging() {
 		try {
@@ -40,6 +40,11 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
+
+
+document.getElementById('myButton').addEventListener('click', function() {
+      hideNotificationArea();
+    });
 </script>
 <script type='text/javascript' src='https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
