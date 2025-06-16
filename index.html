@@ -8,6 +8,8 @@
 		try {
 			console.log('embeddedservice_bootstrap:##', embeddedservice_bootstrap);
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+			embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"device" : "mobile!!"});
+
 console.log('embeddedservice_bootstrap:#2#', embeddedservice_bootstrap);
 			embeddedservice_bootstrap.init(
 				'00Dce000001LoFm',
