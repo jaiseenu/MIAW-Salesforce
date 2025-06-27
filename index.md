@@ -5,34 +5,24 @@
    <body>
       <script type='text/javascript'>
          
-         
-         
-         function initEmbeddedMessaging() {
-         	try {
-			let ipAddress = "";
-    			let city = "";
-    			let region = "";
-			let regionCode = "";
-		    	let country = "";
-		    	let countryCode = "";
-		    	let latitude = "";
-		    	let longitude = "";
-		    	let network = "";
-		    	let referringSite = document.referrer || "";
-		    	let browserLanguage = navigator.language || "";
-		    	let platform = navigator.platform || "";
-		    	let screenResolution = `${screen.width} x ${screen.height}`;
-		    	let userAgent = navigator.userAgent || "";
+         function getVisitorDetails(){
+		let referringSite = document.referrer || "";
+		let browserLanguage = navigator.language || "";
+		let platform = navigator.platform || "";
+		let screenResolution = `${screen.width} x ${screen.height}`;
+		let userAgent = navigator.userAgent || "";
 
-			console.log("Referring Site:", referringSite);
-			console.log("Browser Language:", browserLanguage);
-			console.log("Platform:", platform);
-			console.log("Screen Resolution:", screenResolution);
-			console.log("User Agent:", userAgent);
+		let ipAddress = "";
+		let city = "";
+		let region = "";
+		let regionCode = "";
+		let country = "";
+		let countryCode = "";
+		let network = "";
 
-			fetch('https://ipapi.co/json/')
-			      .then(response => response.json())
-			      .then(data => {
+		fetch('https://ipapi.co/json/')
+			.then(response => response.json())
+			.then(data => {
 			        ipAddress = data.ip;
 			        city = data.city;
 			        region = data.region;
@@ -40,34 +30,19 @@
 			        country = data.country_name;
 				countryCode = data.country_code;
 			        network = data.org;
-			
-			        // Log fetched values
-			        console.log("IP Address:", ipAddress);
-			        console.log("City:", city);
-			        console.log("Region:", region);
-			        console.log("Country:", country);
-			        console.log("Network (ISP):", network);
-			
-			        // Use the variables as needed
-			        // Example:
-			        const visitorInfo = {
-			          ipAddress,
-			          city,
-			          region,
-			          country,
-			          network,
-			          referringSite,
-			          browserLanguage,
-			          platform,
-			          screenResolution,
-			          userAgent
-			        };
-			        console.log("All Visitor Info Object:", visitorInfo);
-			      })
-			      .catch(error => {
-			        console.error("Error fetching IP info:", error);
-			      });
-			
+			})
+			.catch(error => {
+				console.error("Error fetching IP info:", error);
+			});
+		 const visitorInfo = { ipAddress, city, region, regionCode, country, countryCode, network, referringSite,
+			          browserLanguage, platform, screenResolution, userAgent };
+		console.log("All Visitor Info Object:", visitorInfo);
+		return visitorInfo;
+	 }
+         
+         function initEmbeddedMessaging() {
+         	try {
+			console.log('VISITOR DETAILS:##', getVisitorDetails());
          		console.log('embeddedservice_bootstrap:##', embeddedservice_bootstrap);
          		embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
          		//embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"device" : "mobile!!"});
