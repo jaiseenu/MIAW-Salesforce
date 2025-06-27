@@ -5,7 +5,7 @@
    <body>
       <script type='text/javascript'>
          
-         function getVisitorDetails(){
+         async function getVisitorDetails(){
 		const referringSite = document.referrer || "";
 		const browserLanguage = navigator.language || "";
 		const platform = navigator.platform || "";
@@ -39,7 +39,8 @@
          
          function initEmbeddedMessaging() {
          	try {
-			console.log('VISITOR DETAILS:##', getVisitorDetails());
+			const visitor_details = getVisitorDetails();
+			console.log('VISITOR DETAILS:##', visitor_details);
          		console.log('embeddedservice_bootstrap:##', embeddedservice_bootstrap);
          		embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
          		//embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"device" : "mobile!!"});
