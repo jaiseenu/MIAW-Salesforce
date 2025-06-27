@@ -6,37 +6,34 @@
       <script type='text/javascript'>
          
          function getVisitorDetails(){
-		let referringSite = document.referrer || "";
-		let browserLanguage = navigator.language || "";
-		let platform = navigator.platform || "";
-		let screenResolution = `${screen.width} x ${screen.height}`;
-		let userAgent = navigator.userAgent || "";
-
-		let ipAddress = "";
+		const referringSite = document.referrer || "";
+		const browserLanguage = navigator.language || "";
+		const platform = navigator.platform || "";
+		const screenResolution = `${screen.width} x ${screen.height}`;
+		const userAgent = navigator.userAgent || "";
+		let ipAddress = data.ip;
 		let city = "";
 		let region = "";
 		let regionCode = "";
 		let country = "";
 		let countryCode = "";
 		let network = "";
-
-		fetch('https://ipapi.co/json/')
-			.then(response => response.json())
-			.then(data => {
-			        ipAddress = data.ip;
-			        city = data.city;
-			        region = data.region;
-				regionCode = data.region_code;
-			        country = data.country_name;
-				countryCode = data.country_code;
-			        network = data.org;
-			})
-			.catch(error => {
-				console.error("Error fetching IP info:", error);
-			});
-		 const visitorInfo = { ipAddress, city, region, regionCode, country, countryCode, network, referringSite,
+		try {
+		      	const response = await fetch('https://ipapi.co/json/');
+		      	const data = await response.json();
+		
+		      	ipAddress = data.ip;
+			city = data.city;
+			region = data.region;
+			regionCode = data.region_code;
+			country = data.country_name;
+			countryCode = data.country_code;
+			network = data.org;
+		} catch (error) {
+			console.error("Error fetching visitor info:", error);
+		}
+		const visitorInfo = { ipAddress, city, region, regionCode, country, countryCode, network, referringSite,
 			          browserLanguage, platform, screenResolution, userAgent };
-		console.log("All Visitor Info Object:", visitorInfo);
 		return visitorInfo;
 	 }
          
