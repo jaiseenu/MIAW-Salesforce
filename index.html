@@ -67,9 +67,7 @@
             Platform: visitorDetails.platform,
             Screen_Resolution: visitorDetails.screenResolution,
             User_Agent: visitorDetails.screenResolution,
-            Screen_Resolution: visitorDetails.screenResolution,
-            Screen_Resolution: visitorDetails.screenResolution,
-            Screen_Resolution: visitorDetails.screenResolution,
+            Location: visitorDetails.location
           });
         });
 
