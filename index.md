@@ -66,7 +66,7 @@
             Browser_Language: visitorDetails.browserLanguage,
             Platform: visitorDetails.platform,
             Screen_Resolution: visitorDetails.screenResolution,
-            User_Agent: visitorDetails.screenResolution,
+            User_Agent: visitorDetails.userAgent,
             Location: visitorDetails.location,
             Timezone: visitorDetails.timezone
           });
