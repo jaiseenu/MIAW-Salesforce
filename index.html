@@ -14,7 +14,7 @@
 
       // Initialize IP-based details
       let ipAddress = "", city = "", region = "", regionCode = "";
-      let country = "", countryCode = "", network = "";
+      let country = "", countryCode = "", network = "", timezone = "";
 
       try {
         const response = await fetch('https://ipapi.co/json/');
@@ -27,12 +27,13 @@
         country = data.country_name;
         countryCode = data.country_code;
         network = data.org;
+        timezone = data.timezone;
       } catch (error) {
         console.error("Error fetching visitor info:", error);
       }
 
       return {
-        ipAddress, city, region, regionCode, country, countryCode, network,
+        ipAddress, city, region, regionCode, country, countryCode, network, timezone,
         referringSite, browserLanguage, platform, screenResolution, userAgent
       };
     }
