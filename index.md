@@ -31,9 +31,15 @@
       } catch (error) {
         console.error("Error fetching visitor info:", error);
       }
-
+      
+      let locationParts = [];
+      if (city) locationParts.push(city);
+      if (regionCode) locationParts.push(regionCode);
+      if (country) locationParts.push(country);
+      
+      const location = locationParts.join(", ");
       return {
-        ipAddress, city, region, regionCode, country, countryCode, network, timezone,
+        ipAddress, city, region, regionCode, country, countryCode, location, network, timezone,
         referringSite, browserLanguage, platform, screenResolution, userAgent
       };
     }
@@ -54,7 +60,16 @@
           console.log("Received the onEmbeddedMessagingReady event…");
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
             device: deviceType,
-            ...visitorDetails // Optionally pass full details
+            IP_Address: visitorDetails.ipAddress,
+            Referring_Site: visitorDetails.referringSite,
+            Network: visitorDetails.network,
+            Browser_Language: visitorDetails.browserLanguage,
+            Platform: visitorDetails.platform,
+            Screen_Resolution: visitorDetails.screenResolution,
+            User_Agent: visitorDetails.screenResolution,
+            Screen_Resolution: visitorDetails.screenResolution,
+            Screen_Resolution: visitorDetails.screenResolution,
+            Screen_Resolution: visitorDetails.screenResolution,
           });
         });
 
