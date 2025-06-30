@@ -1,74 +1,66 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 </head>
 <body>
   <script type="text/javascript">
     async function getVisitorDetails() {
-      // Basic client-side details
-      const referringSite = document.referrer || "";
-      const browserLanguage = navigator.language || "";
-      const platform = navigator.platform || "";
-      const screenResolution = `${screen.width} x ${screen.height}`;
-      const userAgent = navigator.userAgent || "";
-
-      // Initialize IP-based details
-      let ipAddress = "", city = "", region = "", regionCode = "";
-      let country = "", countryCode = "", network = "", timezone = "";
+      const visitor = {
+        referringSite: document.referrer || "",
+        browserLanguage: navigator.language || "",
+        platform: navigator.platform || "",
+        screenResolution: `${screen.width} x ${screen.height}`,
+        userAgent: navigator.userAgent || ""
+      };
 
       try {
         const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) throw new Error("Failed to fetch IP data");
         const data = await response.json();
 
-        ipAddress = data.ip;
-        city = data.city;
-        region = data.region;
-        regionCode = data.region_code;
-        country = data.country_name;
-        countryCode = data.country_code;
-        network = data.org;
-        timezone = data.timezone;
+        visitor.ipAddress = data.ip || "";
+        visitor.city = data.city || "";
+        visitor.region = data.region || "";
+        visitor.regionCode = data.region_code || "";
+        visitor.country = data.country_name || "";
+        visitor.countryCode = data.country_code || "";
+        visitor.network = data.org || "";
+        visitor.timezone = data.timezone || "";
+
+        const locationParts = [visitor.city, visitor.regionCode, visitor.country].filter(Boolean);
+        visitor.location = locationParts.join(", ");
+
       } catch (error) {
         console.error("Error fetching visitor info:", error);
       }
-      
-      let locationParts = [];
-      if (city) locationParts.push(city);
-      if (regionCode) locationParts.push(regionCode);
-      if (country) locationParts.push(country);
-      
-      const location = locationParts.join(", ");
-      return {
-        ipAddress, city, region, regionCode, country, countryCode, location, network, timezone,
-        referringSite, browserLanguage, platform, screenResolution, userAgent
-      };
+
+      return visitor;
     }
 
     async function initEmbeddedMessaging() {
       try {
-        const visitorDetails = await getVisitorDetails();
-        console.log("VISITOR DETAILS:", visitorDetails);
-        console.log("embeddedservice_bootstrap:", embeddedservice_bootstrap);
+        const visitor = await getVisitorDetails();
+        console.log("Visitor Details:", visitor);
 
         embeddedservice_bootstrap.settings.language = 'en_US';
 
-        // Optional: detect device type
-        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-        const deviceType = isMobile ? "Mobile" : "Desktop";
-
         window.addEventListener("onEmbeddedMessagingReady", () => {
-          console.log("Received the onEmbeddedMessagingReady event…");
+          console.log("onEmbeddedMessagingReady event received");
+
+          // NOTE: The following field names (e.g., IP_Address, Referring_Site, etc.) 
+          // must not be changed during assignment. These names must match 
+          // exactly what is configured in Salesforce pre-chat mapping.
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            device: deviceType,
-            IP_Address: visitorDetails.ipAddress,
-            Referring_Site: visitorDetails.referringSite,
-            Network: visitorDetails.network,
-            Browser_Language: visitorDetails.browserLanguage,
-            Platform: visitorDetails.platform,
-            Screen_Resolution: visitorDetails.screenResolution,
-            User_Agent: visitorDetails.userAgent,
-            Location: visitorDetails.location,
-            Timezone: visitorDetails.timezone
+            IP_Address: visitor.ipAddress,
+            Referring_Site: visitor.referringSite,
+            Network: visitor.network,
+            Browser_Language: visitor.browserLanguage,
+            Platform: visitor.platform,
+            Screen_Resolution: visitor.screenResolution,
+            User_Agent: visitor.userAgent,
+            Location: visitor.location,
+            Timezone: visitor.timezone
           });
         });
 
@@ -76,19 +68,16 @@
           '00Dce000001LoFm',
           'Web_Chat',
           'https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991',
-          {
-            scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com'
-          }
+          { scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com' }
         );
 
-      } catch (err) {
-        console.error("Error initializing Embedded Messaging:", err);
+      } catch (error) {
+        console.error("Error initializing Embedded Messaging:", error);
       }
     }
   </script>
 
   <script
-    type="text/javascript"
     src="https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js"
     onload="initEmbeddedMessaging()">
   </script>
