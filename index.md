@@ -25,16 +25,17 @@
 
         embeddedservice_bootstrap.settings.language = 'en_US';
 
-        window.addEventListener("onEmbeddedMessagingReady", () => {
-          console.log("onEmbeddedMessagingReady event received");
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
-        });
+       // window.addEventListener("onEmbeddedMessagingReady", () => {
+       //   console.log("onEmbeddedMessagingReady event received");
+      //    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
+      //  });
 
-        window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
+        window.addEventListener("onEmbeddedMessagingReady", () => {
           console.log("onEmbeddedMessagingButtonClicked event received");
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
 
           if(visitor.Device_Type != ''){
+            console.log("Visitor visitor.Device_Type:", visitor.Device_Type);
             embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
    "_firstName": {
       "value": "Jane",
