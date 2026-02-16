@@ -5,7 +5,7 @@
 </head>
 <body>
   <script type="text/javascript">
-    async function getDetails() {
+    function getDetails() {
       const visitor = {
         Transaction_ID: "test_trans",
         Lead_ID: "test_lead",
@@ -30,13 +30,13 @@
           // NOTE: The following field names (e.g., IP_Address, Referring_Site, etc.) 
           // must not be changed during assignment. These names must match 
           // exactly what is configured in Salesforce pre-chat mapping.
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(visitor);
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
         });
 
         // When user manually clicks the chat button
         window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
           console.log("onEmbeddedMessagingButtonClicked event received");
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(visitor));
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails()));
 
           if(visitor.Device_Type != ''){
             const success = await embeddedservice_bootstrap.utilAPI.launchChat();
