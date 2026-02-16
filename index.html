@@ -35,10 +35,24 @@
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
 
           if(visitor.Device_Type != ''){
-            const success = embeddedservice_bootstrap.utilAPI.launchChat(); // Removed await
-            console.log("LAUNCH SUCCESS:", success);
+            embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
+   "_firstName": {
+      "value": "Jane",
+      "isEditableByEndUser": true
+    },
+    "_lastName": {
+      "value": "A2",
+      "isEditableByEndUser": true
+    },
+    "_email": {
+      "value": "test@sf.com",
+      "isEditableByEndUser": true
+    }
+  });
           }
         });
+
+
 
         embeddedservice_bootstrap.init(
           '00Dce000001LoFm',
