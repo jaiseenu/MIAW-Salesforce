@@ -33,7 +33,18 @@
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
         });
 
-       
+        // When user manually clicks the chat button
+        window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
+          console.log("onEmbeddedMessagingButtonClicked event received");
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
+
+          if(visitor.Device_Type != ''){
+            const success = await embeddedservice_bootstrap.utilAPI.launchChat();
+          console.log("LAUNCH SUCCESS:", success);
+          }
+          
+
+        });
 
 
         embeddedservice_bootstrap.init(
