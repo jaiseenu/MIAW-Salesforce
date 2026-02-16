@@ -30,7 +30,7 @@
       //    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
       //  });
 
-        window.addEventListener("onEmbeddedMessagingReady", () => {
+        window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
           console.log("onEmbeddedMessagingButtonClicked event received");
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
 
