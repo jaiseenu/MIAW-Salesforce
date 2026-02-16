@@ -7,34 +7,13 @@
   <script type="text/javascript">
     async function getVisitorDetails() {
       const visitor = {
-        referringSite: document.referrer || "",
-        browserLanguage: navigator.language || "",
-        platform: navigator.platform || "",
-        screenResolution: `${screen.width} x ${screen.height}`,
-        userAgent: navigator.userAgent || ""
+        transaction_id: "test_trans",
+        lead_id: "test_lead",
+        application_id: "test_appid",
+        application_channel: "test_appchannel",
+        page_info: "test_page",
+        device_info: "test_device"
       };
-
-      try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (!response.ok) throw new Error("Failed to fetch IP data");
-        const data = await response.json();
-
-        visitor.ipAddress = data.ip || "";
-        visitor.city = data.city || "";
-        visitor.region = data.region || "";
-        visitor.regionCode = data.region_code || "";
-        visitor.country = data.country_name || "";
-        visitor.countryCode = data.country_code || "";
-        visitor.network = data.org || "";
-        visitor.timezone = data.timezone || "";
-
-        const locationParts = [visitor.city, visitor.regionCode, visitor.country].filter(Boolean);
-        visitor.location = locationParts.join(", ");
-
-      } catch (error) {
-        console.error("Error fetching visitor info:", error);
-      }
-
       return visitor;
     }
 
@@ -52,15 +31,12 @@
           // must not be changed during assignment. These names must match 
           // exactly what is configured in Salesforce pre-chat mapping.
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            IP_Address: visitor.ipAddress,
-            Referring_Site: visitor.referringSite,
-            Network: visitor.network,
-            Browser_Language: visitor.browserLanguage,
-            Platform: visitor.platform,
-            Screen_Resolution: visitor.screenResolution,
-            User_Agent: visitor.userAgent,
-            Location: visitor.location,
-            Timezone: visitor.timezone
+            Transaction_ID: visitor.transaction_id,
+            Lead_ID: visitor.lead_id,
+            Application_ID: visitor.application_id,
+            Application_Channel: visitor.application_channel,
+            Page_Info: visitor.page_info,
+            Device_Type: visitor.device_info
           });
         });
 
