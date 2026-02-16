@@ -19,7 +19,7 @@
 
     async function initEmbeddedMessaging() {
       try {
-        const visitor = await getDetails();
+        const visitor = getDetails();
         console.log("Visitor Details:", visitor);
 
         embeddedservice_bootstrap.settings.language = 'en_US';
