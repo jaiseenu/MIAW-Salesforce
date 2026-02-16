@@ -5,21 +5,21 @@
 </head>
 <body>
   <script type="text/javascript">
-    async function getVisitorDetails() {
+    async function getDetails() {
       const visitor = {
-        transaction_id: "test_trans",
-        lead_id: "test_lead",
-        application_id: "test_appid",
-        application_channel: "test_appchannel",
-        page_info: "test_page",
-        device_info: "test_device"
+        Transaction_ID: "test_trans",
+        Lead_ID: "test_lead",
+        Application_ID: "test_appid",
+        Application_Channel: "test_appchannel",
+        Page_Info: "test_page",
+        Device_Type: "test_device"
       };
       return visitor;
     }
 
     async function initEmbeddedMessaging() {
       try {
-        const visitor = await getVisitorDetails();
+        const visitor = await getDetails();
         console.log("Visitor Details:", visitor);
 
         embeddedservice_bootstrap.settings.language = 'en_US';
@@ -30,15 +30,22 @@
           // NOTE: The following field names (e.g., IP_Address, Referring_Site, etc.) 
           // must not be changed during assignment. These names must match 
           // exactly what is configured in Salesforce pre-chat mapping.
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            Transaction_ID: visitor.transaction_id,
-            Lead_ID: visitor.lead_id,
-            Application_ID: visitor.application_id,
-            Application_Channel: visitor.application_channel,
-            Page_Info: visitor.page_info,
-            Device_Type: visitor.device_info
-          });
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
         });
+
+        // When user manually clicks the chat button
+        window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
+          console.log("onEmbeddedMessagingButtonClicked event received");
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
+
+          if(visitor.Device_Type != ''){
+            const success = await embeddedservice_bootstrap.utilAPI.launchChat();
+          console.log("LAUNCH SUCCESS:", success);
+          }
+          
+
+        });
+
 
         embeddedservice_bootstrap.init(
           '00Dce000001LoFm',
