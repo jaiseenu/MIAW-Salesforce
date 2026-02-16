@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 </head>
 <body>
+  <!-- First define the function -->
   <script type="text/javascript">
     function getDetails() {
       const visitor = {
@@ -26,26 +27,18 @@
 
         window.addEventListener("onEmbeddedMessagingReady", () => {
           console.log("onEmbeddedMessagingReady event received");
-
-          // NOTE: The following field names (e.g., IP_Address, Referring_Site, etc.) 
-          // must not be changed during assignment. These names must match 
-          // exactly what is configured in Salesforce pre-chat mapping.
           embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
         });
 
-        // When user manually clicks the chat button
         window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
           console.log("onEmbeddedMessagingButtonClicked event received");
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails()));
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
 
           if(visitor.Device_Type != ''){
-            const success = await embeddedservice_bootstrap.utilAPI.launchChat();
-          console.log("LAUNCH SUCCESS:", success);
+            const success = embeddedservice_bootstrap.utilAPI.launchChat(); // Removed await
+            console.log("LAUNCH SUCCESS:", success);
           }
-          
-
         });
-
 
         embeddedservice_bootstrap.init(
           '00Dce000001LoFm',
@@ -60,6 +53,7 @@
     }
   </script>
 
+  <!-- Then load the script that calls it -->
   <script
     src="https://pflms--qa.sandbox.my.site.com/ESWWebChat1739454676991/assets/js/bootstrap.min.js"
     onload="initEmbeddedMessaging()">
