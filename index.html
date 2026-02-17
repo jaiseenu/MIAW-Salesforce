@@ -39,11 +39,11 @@
             embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
    "_firstName": {
       "value": "Jane",
-      "isEditableByEndUser": true
+      "isEditableByEndUser": false
     },
     "_lastName": {
       "value": "A2",
-      "isEditableByEndUser": true
+      "isEditableByEndUser": false
     },
     "_email": {
       "value": "test@sf.com",
