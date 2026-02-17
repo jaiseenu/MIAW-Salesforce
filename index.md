@@ -78,6 +78,12 @@
       window.addEventListener("onEmbeddedMessagingReady", () => {
         console.log("Messaging Ready");
 
+        
+      });
+
+      // when chat button clicked
+      window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
+        console.log("Chat Button Clicked");
         embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
 
         const inputValues = getInputValues();
@@ -96,11 +102,6 @@
             isEditableByEndUser: true
           }
         });
-      });
-
-      // Optional: when chat button clicked
-      window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
-        console.log("Chat Button Clicked");
       });
 
     } catch (error) {
