@@ -57,6 +57,7 @@
       Lead_ID: "test_lead",
       Application_ID: "test_appid",
       Application_Channel: "test_appchannel",
+      Application_Error_Info: "test_error info",
       Page_Info: "test_page",
       Device_Type: "test_device"
     };
