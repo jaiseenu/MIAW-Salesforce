@@ -85,11 +85,11 @@
         embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
           "_firstName": {
             value: inputValues.firstName,
-            isEditableByEndUser: false
+            isEditableByEndUser: true
           },
           "_lastName": {
             value: inputValues.lastName,
-            isEditableByEndUser: false
+            isEditableByEndUser: true
           },
           "_email": {
             value: inputValues.email,
