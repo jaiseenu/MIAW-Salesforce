@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <!-- DUMMY INPUTS FOR TESTING - START -->
   <style>
     .user-info-form {
       max-width: 400px;
@@ -22,27 +23,25 @@
   </style>
 </head>
 <body>
-
 <div class="user-info-form">
   <h3>User Information</h3>
-
   <div class="form-group">
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" placeholder="Enter first name">
   </div>
-
   <div class="form-group">
     <label for="lastName">Last Name:</label>
     <input type="text" id="lastName" placeholder="Enter last name">
   </div>
-
   <div class="form-group">
     <label for="email">Email:</label>
     <input type="email" id="email" placeholder="Enter email">
   </div>
 </div>
+<!-- DUMMY INPUTS FOR TESTING - END -->
 
 <script>
+  //replace the customer details such as first name, last name and email
   function getInputValues() {
     return {
       firstName: document.getElementById('firstName')?.value || '',
@@ -51,6 +50,7 @@
     };
   }
 
+  //pass the values with the actual ones
   function getDetails() {
     return {
       Transaction_ID: "test_trans",
@@ -66,8 +66,6 @@
   function initEmbeddedMessaging() {
     try {
       embeddedservice_bootstrap.settings.language = 'en_US';
-
-      // Initialize Embedded Messaging ONCE
       embeddedservice_bootstrap.init(
         '00Dce000001LoFm',
         'Web_Chat',
@@ -75,36 +73,26 @@
         { scrt2URL: 'https://pflms--qa.sandbox.my.salesforce-scrt.com' }
       );
 
-      // When messaging is ready
-      window.addEventListener("onEmbeddedMessagingReady", () => {
-        console.log("Messaging Ready");
-
-        
-      });
-
-      // when chat button clicked
       window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
         console.log("Chat Button Clicked");
         embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields(getDetails());
-
         const inputValues = getInputValues();
-
+        const isEditable = (value) => !value || value.trim() === "";
         embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
-          "_firstName": {
-            value: inputValues.firstName,
-            isEditableByEndUser: true
-          },
-          "_lastName": {
-            value: inputValues.lastName,
-            isEditableByEndUser: true
-          },
-          "_email": {
-            value: inputValues.email,
-            isEditableByEndUser: true
-          }
+            "_firstName": {
+                value: inputValues.firstName || "",
+                isEditableByEndUser: isEditable(inputValues.firstName)
+            },
+            "_lastName": {
+                value: inputValues.lastName || "",
+                isEditableByEndUser: isEditable(inputValues.lastName)
+            },
+            "_email": {
+                value: inputValues.email || "",
+                isEditableByEndUser: isEditable(inputValues.email)
+            }
         });
       });
-
     } catch (error) {
       console.error("Error initializing Embedded Messaging:", error);
     }
